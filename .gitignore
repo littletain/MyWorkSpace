@@ -50,4 +50,4 @@ Thumbs.db
 
 # java ignore
 *.class
-/out/
+out/

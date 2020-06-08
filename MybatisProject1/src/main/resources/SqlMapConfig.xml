@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration
-        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<!-- mybatis的主配置文件 -->
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
 <configuration>
+    <!-- resource属性，用于指定配置文件的位置，是按照类路径的写法写，且必须存在类路径下 -->
+    <!-- url属性：统一资源定位符，可以唯一标示一个资源的位置，写法
+     协议 主机 端口 URI，比如：http://localhost:8080/myServlet
+     URI:统一资源标识符，他是在应用中可以唯一定位一个资源
+     此项目就可以以如下方式定义：其中协议是file协议，端口是默认端口（所以省略了）
+     <properties url="file:///D:\workspace\MybatisProject1\src\main\resources\jdbcConfig.properties"></properties>
+     -->
+    <properties resource="jdbcConfig.properties"></properties>
+    <!-- typeAliases用于指定别名，只能指定domain中的类，type是全类名，alias是别名，指定后不区分大小写 -->
+    <typeAliases>
+        <!-- 用于指定要配置别名的包，当指定后，该包下的实体类全都会注册别名，且别名就是类名，不区分大小 -->
+        <package name="org.example.domain"/>
+        <!-- <typeAlias type="org.example.domain.User" alias="User"></typeAlias> -->
+    </typeAliases>
     <!-- 配置环境 -->
     <environments default="mysql">
         <!-- 配置mysql的环境 -->
@@ -12,18 +24,17 @@
             <transactionManager type="JDBC"></transactionManager>
             <!-- 配置数据源（也叫连接池） -->
             <dataSource type="POOLED">
-                <!-- 配置连接数据库的4个基本数据信息 -->
-                <!-- driver如果有问题可以试试com.mysql.cj.jdbc.Driver -->
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://127.0.0.1:3306/db2?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8"/>
-                <property name="username" value="root"/>
-                <property name="password" value="root"/>
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
             </dataSource>
         </environment>
     </environments>
-
     <!-- 指定映射配置文件的位置 -->
     <mappers>
-        <mapper resource="org/example/dao/IUserDao.xml"/>
+        <!-- <mapper resource="org/example/dao/IUserDao.xml" /> -->
+        <!-- package标签用于指定dao接口所在的包，当指定了之后就不需要再写mapper以及resource或class了 -->
+        <package name="org.example.dao"/>
     </mappers>
 </configuration>

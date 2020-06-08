@@ -19,4 +19,6 @@ public interface IUserDao {
     public void deleteUser(Integer id);
     public List<User> findByName(String name);
     public List<User> findUserByVo(QueryVo vo);
+    public List<User> findByCondition(User user);
+    public List<User> findUserIds(QueryVo vo);
 }

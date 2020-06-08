@@ -28,4 +28,34 @@
     <select id="findUserByVo" parameterType="org.example.domain.QueryVo" resultType="org.example.domain.User">
         select * from user where username like #{user.username}
     </select>
+    <select id="findByCondition" parameterType="org.example.domain.User" resultType="org.example.domain.User">
+        select * from user
+        <where><!-- 加上where标签之后，就不需要写where 1=1 这种恒真的条件了 -->
+            <if test="id != null">
+                and id=#{id}
+            </if>
+            <if test="username != null">
+                and username=#{username}
+            </if>
+            <if test="sex != null">
+                and sex=#{sex}
+            </if>
+            <if test="address">
+                and address=#{address}
+            </if>
+            <if test="birthday">
+                and birthday=#{birthday}
+            </if>
+        </where>
+    </select>
+    <select id="findUserIds" parameterType="org.example.domain.QueryVo" resultType="org.example.domain.User">
+        select * from user
+        <where>
+            <if test="Ids != null &amp;&amp; Ids.size>0"><!-- java基础语法细节不太熟…… -->
+                <foreach collection="Ids" open="and id in (" close=")" item="id" separator=",">
+                    #{id} <!-- #{}里面和item里面名字对应 -->
+                </foreach>
+            </if>
+        </where>
+    </select>
 </mapper>

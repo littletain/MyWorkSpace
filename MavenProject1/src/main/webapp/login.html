@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello</title>
+    <script>
+        window.onload = function(){//为啥推荐用const而不是var定义
+            var img = document.getElementById("checkCodeImg");
+            img.onclick = function(){
+                var date = new Date().getTime();
+                img.src = "/MavenProject1/CheckCode?"+date;
+            }
+        }
+
+    </script>
+</head>
+<body>
+    hello,tomcat.
+    <form action="/MavenProject1/LoginServlet" method="post">
+        <tr>
+            <td><input type="text" name="userName" placeholder="请输入用户名"></td>
+            <td><input type="password" name="password" placeholder="请输入密码"></td>
+            <td><input type="text" name="checkCode" placeholder="请输入下方图片中的验证码"></td>
+            <td><img id="checkCodeImg" src="/MavenProject1/CheckCode"></td>
+            <td><input type="submit" name="submit"></td>
+        </tr>
+
+    </form>
+</body>
+</html>

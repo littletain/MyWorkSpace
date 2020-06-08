@@ -1,3 +1,8 @@
+# windows ignore
+desktop.ini
+Thumbs.db
+ehthumbs.db
+
 # kdiff3 ignore
 *.orig
 
@@ -45,3 +50,4 @@ Thumbs.db
 
 # java ignore
 *.class
+/out/
